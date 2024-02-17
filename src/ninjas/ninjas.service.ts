@@ -15,11 +15,15 @@ export class NinjasService {
         if (rank) {
             return this.ninjas.filter(ninja => ninja.rank === rank)
         }
-        return this.ninjas
+        return 
     }
 
-    public getNinja(id: string){
-        return this.ninjas.find(ninja => ninja.id === parseInt(id))
+    public getNinja(id: number){
+        const ninja = this.ninjas.find(ninja => ninja.id === id)
+        if (!ninja) {
+            throw new Error('Ninja not found')
+        }
+        return ninja
     }
 
     public createNinja(createNinjaDto: CreateNinjaDto){
@@ -31,8 +35,8 @@ export class NinjasService {
         return 'success'
     }
 
-    public removeNinja(id: string){
-        this.ninjas = this.ninjas.filter(ninja => ninja.id !== +id)
+    public removeNinja(id: number){
+        this.ninjas = this.ninjas.filter(ninja => ninja.id !== id)
         return this.ninjas
     }
 }
