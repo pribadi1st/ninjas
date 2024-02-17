@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { UpdateNinjaDto } from './dto/update-ninja.dto'
 import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { NinjasService } from './ninjas.service';
+import { VillageGuard } from 'src/village/village.guard';
 
 @Controller('ninjas')
+@UseGuards(VillageGuard)
 export class NinjasController {
     // Get --colection ninjas
     constructor(private readonly ninjasService: NinjasService){}
